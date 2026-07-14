@@ -16,7 +16,7 @@ backups before running this script.
 USE master;
 GO
 
---Drop and recreaate the 'Datawarehouse' database
+--Drop and recreate the 'Datawarehouse' database
 
 IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DataWarehouse')
 BEGIN
