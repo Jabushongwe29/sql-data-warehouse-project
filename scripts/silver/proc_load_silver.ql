@@ -118,7 +118,7 @@ BEGIN
 		PRINT '>> Inserting Data Into: silver.crm_sales_details';
 		INSERT INTO silver.crm_sales_details (
 			sls_ord_num,
-			sls_prd_key,
+			sls_prod_key,
 			sls_cust_id,
 			sls_order_dt,
 			sls_ship_dt,
@@ -129,7 +129,7 @@ BEGIN
 		)
 		SELECT 
 			sls_ord_num,
-			sls_prd_key,
+			sls_prod_key,
 			sls_cust_id,
 			CASE 
 				WHEN sls_order_dt = 0 OR LEN(sls_order_dt) != 8 THEN NULL
