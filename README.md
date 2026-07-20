@@ -10,7 +10,9 @@ The warehouse is structured into three layers:
 
 
 Bronze — Raw data, loaded as-is from source CSV files (ERP and CRM systems), with no transformation. This preserves an unaltered copy of the source data for traceability and reprocessing.
+
 Silver — Cleansed, standardized, and normalized data. This is where data quality issues from the source systems get resolved.
+
 Gold — Business-ready data modeled into a star schema, optimized for reporting and analytical queries.
 
 
@@ -50,12 +52,19 @@ A few of the concepts I worked to properly understand while building this, rathe
 
 
 **Idempotency:** The setup script drops and recreates the database on every run, so it can be executed repeatedly and always land in the same clean state, rather than relying on error-handling to avoid duplicate objects.
+
 **SQL Server batch execution:** Understanding how GO separates statements into batches, and why some statements (like CREATE SCHEMA) must be isolated in their own batch, or the script won't compile.
+
 **Why separate layers physically:** Keeping raw (Bronze), cleaned (Silver), and business-ready (Gold) data in distinct schemas rather than transforming data in place, so raw source data is always recoverable, and each layer's purpose stays clear.
+
 **DDL vs. DML:** Distinguishing structural setup (creating databases/schemas) from data loading patterns (like truncate-and-insert), which serve different purposes in the pipeline.
+
 **Data architecture tradeoffs:** Understanding the differences between data architecture approaches (e.g. Medallion vs. others) and the reasoning behind when one is a better fit than another, rather than treating it as a fixed template.
+
 **Star schema vs. snowflake schema:** Understanding the structural difference between the two and the tradeoffs involved (query simplicity and performance vs normalisation and storage efficiency).
+
 **Fact tables vs. dimension tables:** Understanding the distinction between tables that store measurable business events (facts) and tables that store descriptive context around those events (dimensions), and how they connect in a star schema.
+
 **Hands-on ETL experience:** Beyond the theory, actually building and running extract-transform-load pipelines end-to-end, which surfaced practical issues (data quality, sequencing, batch execution) that reading alone never would have.
 
 
