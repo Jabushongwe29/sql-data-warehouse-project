@@ -1,100 +1,87 @@
-# Data Warehouse and Analytics Project
+**SQL Data Warehouse Project**
 
-Welcome to the **Data Warehouse and Analytics Project** repository! 🚀  
-This project demonstrates a comprehensive data warehousing and analytics solution, from building a data warehouse to generating actionable insights. Designed as a portfolio project, it highlights industry best practices in data engineering and analytics.
+A hands-on data engineering project built to design and implement a modern data warehouse using SQL Server, following the Medallion Architecture (Bronze, Silver, Gold). This project consolidates sales data from ERP and CRM source systems into a single, analytics-ready model.
 
----
-## 🏗️ Data Architecture
+This project was built as part of my transition into data engineering. I followed Data With Baraa's SQL Data Warehouse tutorial as a base, then rebuilt key pieces independently to deepen my understanding of the underlying concepts rather than just following along.
 
-The data architecture for this project follows Medallion Architecture **Bronze**, **Silver**, and **Gold** layers:
-![Data Architecture](docs/data_architecture.png)
+🏗️ **Architecture**
 
-1. **Bronze Layer**: Stores raw data as-is from the source systems. Data is ingested from CSV Files into SQL Server Database.
-2. **Silver Layer**: This layer includes data cleansing, standardization, and normalization processes to prepare data for analysis.
-3. **Gold Layer**: Houses business-ready data modeled into a star schema required for reporting and analytics.
+The warehouse is structured into three layers:
 
----
-## 📖 Project Overview
 
-This project involves:
+Bronze — Raw data, loaded as-is from source CSV files (ERP and CRM systems), with no transformation. This preserves an unaltered copy of the source data for traceability and reprocessing.
+Silver — Cleansed, standardized, and normalized data. This is where data quality issues from the source systems get resolved.
+Gold — Business-ready data modeled into a star schema, optimized for reporting and analytical queries.
 
-1. **Data Architecture**: Designing a Modern Data Warehouse Using Medallion Architecture **Bronze**, **Silver**, and **Gold** layers.
-2. **ETL Pipelines**: Extracting, transforming, and loading data from source systems into the warehouse.
-3. **Data Modeling**: Developing fact and dimension tables optimized for analytical queries.
-4. **Analytics & Reporting**: Creating SQL-based reports and dashboards for actionable insights. 
 
-## 🚀 Project Requirements
+🎯 **Project Goals**
 
-### Building the Data Warehouse (Data Engineering)
 
-#### Objective
-Develop a modern data warehouse using SQL Server to consolidate sales data, enabling analytical reporting and informed decision-making.
+Consolidate ERP and CRM sales data into a single, query-friendly model
+Resolve data quality issues prior to analysis
+Design fact and dimension tables optimized for analytical queries
+Produce SQL-based insights into customer behavior, product performance, and sales trends
 
-#### Specifications
-- **Data Sources**: Import data from two source systems (ERP and CRM) provided as CSV files.
-- **Data Quality**: Cleanse and resolve data quality issues prior to analysis.
-- **Integration**: Combine both sources into a single, user-friendly data model designed for analytical queries.
-- **Scope**: Focus on the latest dataset only; historization of data is not required.
-- **Documentation**: Provide clear documentation of the data model to support both business stakeholders and analytics teams.
 
----
+🛠️ **Tech Stack**
 
-### BI: Analytics & Reporting (Data Analysis)
 
-#### Objective
-Develop SQL-based analytics to deliver detailed insights into:
-- **Customer Behavior**
-- **Product Performance**
-- **Sales Trends**
+SQL Server / T-SQL
+Medallion Architecture (Bronze / Silver / Gold)
+Star schema data modeling
 
-These insights empower stakeholders with key business metrics, enabling strategic decision-making.  
 
-For more details, refer to [docs/requirements.md](docs/requirements.md).
+📂 **Repository Structure**
 
-## 📂 Repository Structure
-```
-data-warehouse-project/
+sql-data-warehouse-project/
 │
-├── datasets/                           # Raw datasets used for the project (ERP and CRM data)
-│
-├── docs/                               # Project documentation and architecture details
-│   ├── etl.drawio                      # Draw.io file shows all different techniquies and methods of ETL
-│   ├── data_architecture.drawio        # Draw.io file shows the project's architecture
-│   ├── data_catalog.md                 # Catalog of datasets, including field descriptions and metadata
-│   ├── data_flow.drawio                # Draw.io file for the data flow diagram
-│   ├── data_models.drawio              # Draw.io file for data models (star schema)
-│   ├── naming-conventions.md           # Consistent naming guidelines for tables, columns, and files
-│
-├── scripts/                            # SQL scripts for ETL and transformations
-│   ├── bronze/                         # Scripts for extracting and loading raw data
-│   ├── silver/                         # Scripts for cleaning and transforming data
-│   ├── gold/                           # Scripts for creating analytical models
-│
-├── tests/                              # Test scripts and quality files
-│
-├── README.md                           # Project overview and instructions
-├── LICENSE                             # License information for the repository
-├── .gitignore                          # Files and directories to be ignored by Git
-└── requirements.txt                    # Dependencies and requirements for the project
-```
----
+├── datasets/          # Raw ERP and CRM source data (CSV)
+├── docs/               # Architecture diagrams and documentation
+├── scripts/
+│   ├── bronze/         # Raw data ingestion scripts
+│   ├── silver/         # Data cleansing and transformation scripts
+│   ├── gold/            # Star schema / analytical model scripts
+├── tests/               # Data quality checks
+└── README.md
 
-## ☕ Stay Connected
+📌 **Key Design Decisions & What I Learned**
 
-Let's stay in touch! Feel free to connect with me on the following platforms:
+A few of the concepts I worked to properly understand while building this, rather than just copying the code:
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/jabulileshongwe)
-[![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.datawithbaraa.com)
 
-## 🛡️ License
+**Idempotency:** The setup script drops and recreates the database on every run, so it can be executed repeatedly and always land in the same clean state, rather than relying on error-handling to avoid duplicate objects.
+**SQL Server batch execution:** Understanding how GO separates statements into batches, and why some statements (like CREATE SCHEMA) must be isolated in their own batch, or the script won't compile.
+**Why separate layers physically:** Keeping raw (Bronze), cleaned (Silver), and business-ready (Gold) data in distinct schemas rather than transforming data in place, so raw source data is always recoverable, and each layer's purpose stays clear.
+**DDL vs. DML:** Distinguishing structural setup (creating databases/schemas) from data loading patterns (like truncate-and-insert), which serve different purposes in the pipeline.
+**Data architecture tradeoffs:** Understanding the differences between data architecture approaches (e.g. Medallion vs. others) and the reasoning behind when one is a better fit than another, rather than treating it as a fixed template.
+**Star schema vs. snowflake schema:** Understanding the structural difference between the two and the tradeoffs involved (query simplicity and performance vs normalisation and storage efficiency).
+**Fact tables vs. dimension tables:** Understanding the distinction between tables that store measurable business events (facts) and tables that store descriptive context around those events (dimensions), and how they connect in a star schema.
+**Hands-on ETL experience:** Beyond the theory, actually building and running extract-transform-load pipelines end-to-end, which surfaced practical issues (data quality, sequencing, batch execution) that reading alone never would have.
 
-This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and share this project with proper attribution.
 
-## 🌟 About Me
 
-Hi there! I'm **Jabulile Shongwe**, also known as **Data With Baraa**. I’m an IT professional and passionate YouTuber on a mission to share knowledge and make working with data enjoyable and engaging!
+🚀 **How to Run**
 
-Let's stay in touch! Feel free to connect with me on the following platforms:
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/jabulileshongwe)
-[![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.datawithbaraa.com)
+Clone this repository
+Run the scripts in scripts/ in order: database/schema setup → bronze layer → silver layer → gold layer
+Source CSVs are located in datasets/
+
+
+🙏 **Acknowledgements**
+
+This project was built following the excellent SQL Data Warehouse tutorial by Data With Baraa. I highly recommend it as a starting point for anyone learning data warehousing fundamentals.
+
+📬 **Contact Me**
+
+Feel free to connect or reach out — I'm always happy to talk data engineering:
+
+
+LinkedIn: www.linkedin.com/in/jabulileshongwe
+Email: jshongwe394@gmail.com
+Website: 
+
+
+📄 License
+
+This project is for portfolio and educational purposes.
