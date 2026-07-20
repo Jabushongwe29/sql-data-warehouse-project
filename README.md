@@ -1,4 +1,4 @@
-**SQL Data Warehouse Project**
+# **SQL Data Warehouse Project**
 
 A hands-on data engineering project built to design and implement a modern data warehouse using SQL Server, following the Medallion Architecture (Bronze, Silver, Gold). This project consolidates sales data from ERP and CRM source systems into a single, analytics-ready model.
 
