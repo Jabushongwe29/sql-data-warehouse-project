@@ -4,9 +4,11 @@ A hands-on data engineering project built to design and implement a modern data 
 
 This project was built as part of my transition into data engineering. I followed Data With Baraa's SQL Data Warehouse tutorial as a base, then rebuilt key pieces independently to deepen my understanding of the underlying concepts rather than just following along.
 
-🏗️ **Architecture**
+##🏗️ **Architecture**
 
 The warehouse is structured into three layers:
+
+docs/data_architecture.png
 
 
 Bronze — Raw data, loaded as-is from source CSV files (ERP and CRM systems), with no transformation. This preserves an unaltered copy of the source data for traceability and reprocessing.
@@ -16,7 +18,7 @@ Silver — Cleansed, standardized, and normalized data. This is where data quali
 Gold — Business-ready data modeled into a star schema, optimized for reporting and analytical queries.
 
 
-🎯 **Project Goals**
+##🎯 **Project Goals**
 
 
 Consolidate ERP and CRM sales data into a single, query-friendly model
@@ -25,7 +27,7 @@ Design fact and dimension tables optimized for analytical queries
 Produce SQL-based insights into customer behavior, product performance, and sales trends
 
 
-🛠️ **Tech Stack**
+##🛠️ **Tech Stack**
 
 
 SQL Server / T-SQL
@@ -33,8 +35,8 @@ Medallion Architecture (Bronze / Silver / Gold)
 Star schema data modeling
 
 
-📂 **Repository Structure**
-
+##📂 **Repository Structure**
+```
 sql-data-warehouse-project/
 │
 ├── datasets/          # Raw ERP and CRM source data (CSV)
@@ -45,8 +47,8 @@ sql-data-warehouse-project/
 │   ├── gold/            # Star schema / analytical model scripts
 ├── tests/               # Data quality checks
 └── README.md
-
-📌 **Key Design Decisions & What I Learned**
+```
+##📌 **Key Design Decisions & What I Learned**
 
 A few of the concepts I worked to properly understand while building this, rather than just copying the code:
 
@@ -69,7 +71,7 @@ A few of the concepts I worked to properly understand while building this, rathe
 
 
 
-🚀 **How to Run**
+##🚀 **How to Run**
 
 
 Clone this repository
@@ -77,11 +79,11 @@ Run the scripts in scripts/ in order: database/schema setup → bronze layer →
 Source CSVs are located in datasets/
 
 
-🙏 **Acknowledgements**
+##🙏 **Acknowledgements**
 
 This project was built following the excellent SQL Data Warehouse tutorial by Data With Baraa. I highly recommend it as a starting point for anyone learning data warehousing fundamentals.
 
-📬 **Contact Me**
+##📬 **Contact Me**
 
 Feel free to connect or reach out — I'm always happy to talk data engineering:
 
@@ -91,6 +93,6 @@ Email: jshongwe394@gmail.com
 Website: 
 
 
-📄 License
+##📄 License
 
 This project is for portfolio and educational purposes.
