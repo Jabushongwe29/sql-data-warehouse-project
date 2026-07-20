@@ -8,8 +8,7 @@ This project was built as part of my transition into data engineering. I followe
 
 The warehouse is structured into three layers:
 
-sql-data-warehouse-project/docs/data_architecture.png
-
+![Data warehouse architecture diagram](docs/data_architecture.png)
 
 Bronze — Raw data, loaded as-is from source CSV files (ERP and CRM systems), with no transformation. This preserves an unaltered copy of the source data for traceability and reprocessing.
 
